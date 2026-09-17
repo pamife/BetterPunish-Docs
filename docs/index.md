@@ -6,8 +6,12 @@
 
 BetterPunish brings punishments, evidence, reports, chat protection, staff investigation, and moderation logs into one plugin. It works with local YAML storage out of the box and can optionally synchronize selected data with Supabase, LuckPerms, Vulcan, and a Discord companion service.
 
+<div class="bp-actions" markdown>
+
 [Install BetterPunish](getting-started/installation.md){ .md-button .md-button--primary }
 [Open the quick start](getting-started/quick-start.md){ .md-button }
+
+</div>
 </div>
 
 ![BetterPunish logo](assets/logo.png)

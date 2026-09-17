@@ -57,6 +57,21 @@
   text-transform: uppercase;
 }
 
+.bp-actions {
+  margin-top: 1rem;
+}
+
+.bp-actions > p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.bp-actions .md-button {
+  margin: 0;
+}
+
 @media screen and (max-width: 44rem) {
   .bp-hero {
     grid-template-columns: 1fr;
