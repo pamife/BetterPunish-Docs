@@ -2,8 +2,8 @@
 
 ## Plugin does not start
 
-1. Confirm the server is Paper 1.21.11.
-2. Confirm the runtime is Java 21.
+1. Confirm the server is a [supported Paper version](../getting-started/compatibility.md).
+2. Confirm the runtime is Java 21 for Paper 1.21.11 or Java 25 for Paper 26.1 and newer.
 3. Read the first BetterPunish exception in the server console.
 4. Check that the server process can create `plugins/BetterPunish/data/`.
 5. Restore the last known-good `config.yml` if YAML parsing fails.

@@ -5,8 +5,9 @@
 | Component | Current requirement |
 | --- | --- |
 | Server | Paper |
-| Minecraft / Paper API | 1.21.11 |
-| Java | 21 or newer within the Java 21 release line |
+| Stable Minecraft versions | Paper 1.21.11, 26.1, and 26.2 |
+| Preview Minecraft version | Paper 26.3 alpha; startup-tested, not stable support |
+| Java | Java 21 for Paper 1.21.11; Java 25 for Paper 26.1+ |
 | Required plugins | None |
 | Optional plugins | LuckPerms, Vulcan |
 | Optional services | Supabase, BetterPunish-compatible Discord companion endpoint |
@@ -17,7 +18,7 @@ BetterPunish is compiled against the Paper API and uses Paper's asynchronous cha
 
 1. Stop the Paper server.
 2. Place the BetterPunish `.jar` in the server's `plugins/` directory.
-3. Start the server with Java 21.
+3. Start the server with the Java version required by Paper: Java 21 for Paper 1.21.11, or Java 25 for Paper 26.1 and newer.
 4. Confirm that `plugins/BetterPunish/config.yml` and `plugins/BetterPunish/data/` are created.
 5. Review `config.yml` before giving moderators access.
 6. Run `/punishreload` after supported configuration changes, or restart the server.
@@ -31,6 +32,8 @@ BetterPunish is compiled against the Paper API and uses Paper's asynchronous cha
 - LuckPerms is only required when `mute-group-sync.enabled` is enabled.
 - Vulcan is detected at runtime. If neither supported Vulcan event class is present, the integration is skipped.
 - Supabase and Discord are disabled while their shipped placeholder values remain unchanged.
+
+See the [compatibility matrix](compatibility.md) for exact tested Paper builds and the distinction between stable and preview verification.
 
 ## First-start check
 

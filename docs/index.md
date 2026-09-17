@@ -18,7 +18,7 @@ BetterPunish brings punishments, evidence, reports, chat protection, staff inves
 </div>
 
 !!! info "Version requirements"
-    The current plugin build targets **Paper 1.21.11** and requires **Java 21**. It uses Paper APIs directly and is not documented as compatible with Spigot.
+    Stable support covers **Paper 1.21.11, 26.1, and 26.2**. Use **Java 21** for Paper 1.21.11 and **Java 25** for Paper 26.1 or newer. Paper 26.3 has passed preview startup testing on an alpha build but is not yet a stable support claim. Spigot is not supported.
 
 <div class="grid cards" markdown>
 
@@ -75,6 +75,7 @@ BetterPunish brings punishments, evidence, reports, chat protection, staff inves
 ## Start here
 
 - [Installation](getting-started/installation.md) — requirements, compatibility, and first startup.
+- [Compatibility](getting-started/compatibility.md) — stable versions, Java requirements, and exact verification scope.
 - [Quick start](getting-started/quick-start.md) — apply a first punishment and open the dashboard.
 - [Configuration](getting-started/configuration.md) — the options that materially change behavior.
 - [Commands](reference/commands.md) — complete command syntax and aliases.
