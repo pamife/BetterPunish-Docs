@@ -1,8 +1,11 @@
 # Discord and LuckPerms
 
+For direct incoming Discord webhooks with Components V2, see [Discord webhook logging](discord-webhooks.md). While enabled, it replaces the companion punishment broadcast for bans, temporary bans, mutes, temporary mutes, kicks, unbans, and unmutes.
+
+
 ## Discord companion endpoint
 
-The current integration is an HTTP companion service, not a direct Discord webhook.
+The legacy companion uses a separate HTTP service. Direct incoming webhooks are configured independently in `discord.yml`.
 
 ```yaml
 discord:

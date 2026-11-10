@@ -80,3 +80,12 @@ Query limits must be positive and are capped at 100.
 
 !!! danger
     `/punishpull` and `/punishcleardb` change stored moderation data. Back up the `data/` directory first.
+
+## Direct Discord webhook
+
+| Command | Purpose | Permission |
+| --- | --- | --- |
+| `/betterpunish webhook test` | Send a real Components V2 test message. | `betterpunish.webhook.test` (OP) |
+| `/betterpunish webhook reload` | Reload discord.yml and reset delivery. | `betterpunish.webhook.reload` (OP) |
+
+`/tggpunish` is an alias. `/punishreload` also reloads discord.yml. See [configuration and delivery details](../integrations/discord-webhooks.md).

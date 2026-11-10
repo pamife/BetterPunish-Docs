@@ -21,3 +21,7 @@ BetterPunish is built with Java 25 against the stable Paper 26.2 API while emitt
 ## What the matrix proves
 
 The matrix proves that BetterPunish loads, enables, reloads, disables, and shuts down without plugin linkage or API errors on those exact builds. It does not mean every punishment, GUI gesture, chat route, external HTTP service, LuckPerms operation, or Vulcan event was interactively exercised on every version. Test those workflows on a staging server before a public release.
+
+## Optional direct Discord webhook
+
+Startup creates discord.yml with delivery disabled. Direct logging uses Java HTTP and Discord Components V2 without a bot or additional plugin. Java/Paper requirements and the storage format remain as listed above. See [Discord setup](../integrations/discord-webhooks.md).

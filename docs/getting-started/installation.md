@@ -10,7 +10,7 @@
 | Java | Java 21 for Paper 1.21.11; Java 25 for Paper 26.1+ |
 | Required plugins | None |
 | Optional plugins | LuckPerms, Vulcan |
-| Optional services | Supabase, BetterPunish-compatible Discord companion endpoint |
+| Optional services | Supabase, direct Discord incoming webhook, BetterPunish-compatible Discord companion endpoint |
 
 BetterPunish is compiled against the Paper API and uses Paper's asynchronous chat event. A Spigot-only server is therefore not supported by the current code.
 
@@ -19,8 +19,8 @@ BetterPunish is compiled against the Paper API and uses Paper's asynchronous cha
 1. Stop the Paper server.
 2. Place the BetterPunish `.jar` in the server's `plugins/` directory.
 3. Start the server with the Java version required by Paper: Java 21 for Paper 1.21.11, or Java 25 for Paper 26.1 and newer.
-4. Confirm that `plugins/BetterPunish/config.yml` and `plugins/BetterPunish/data/` are created.
-5. Review `config.yml` before giving moderators access.
+4. Confirm that `plugins/BetterPunish/config.yml`, `plugins/BetterPunish/discord.yml`, and `plugins/BetterPunish/data/` are created.
+5. Direct webhook logging starts disabled in `discord.yml`; see [Discord webhook setup](../integrations/discord-webhooks.md) to enable it. Review `config.yml` before giving moderators access.
 6. Run `/punishreload` after supported configuration changes, or restart the server.
 
 !!! note

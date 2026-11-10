@@ -89,6 +89,7 @@ nav:
       - Commands and private messages: logging/commands-and-messages.md
   - Integrations:
       - Supabase: integrations/supabase.md
+      - Discord webhooks: integrations/discord-webhooks.md
       - Discord and LuckPerms: integrations/discord-and-luckperms.md
   - Administration:
       - Storage and migration: administration/storage-and-migration.md

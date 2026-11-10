@@ -81,3 +81,12 @@ The code also accepts legacy `tggpunish.*` forms for offense, staff, and several
 - `tggpunish.staff`
 
 Use the `betterpunish.*` names for new setups.
+
+## Direct Discord webhook
+
+| Permission | Default | Purpose |
+| --- | --- | --- |
+| `betterpunish.webhook.test` | OP | Send a real Components V2 test message. |
+| `betterpunish.webhook.reload` | OP | Reload discord.yml and reset delivery. |
+
+The existing `betterpunish.reload` permission also allows full `/punishreload`, including webhook configuration.

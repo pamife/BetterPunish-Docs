@@ -165,3 +165,7 @@ freeze:
 ```
 
 Freeze state is held in memory. Disconnecting while frozen removes that state and, when enabled, immediately creates the configured ban.
+
+## Direct Discord webhook configuration
+
+discord.yml is created separately and disabled by default. It controls the incoming webhook URL, username/avatar, English/German labels, title/footer, fields, timestamps, optional player thumbnails, event filters/colors, and delivery bounds. Reload it with `/betterpunish webhook reload` or `/punishreload`. See the [complete reference and example](../integrations/discord-webhooks.md).
