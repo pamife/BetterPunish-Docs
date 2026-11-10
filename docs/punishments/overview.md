@@ -28,6 +28,8 @@ Units are weeks (`w`), days (`d`), hours (`h`), minutes (`m`), and seconds (`s`)
 
 Applying a new punishment of the same type revokes the previous active record as **Replaced by newer punishment**. For regular mutes, a new temporary duration extends an existing temporary mute from its current expiration. A permanent active mute remains permanent.
 
+Punishment announcements, silent staff alerts, temporary-command confirmations, and integration events show the total duration from creation to expiration (for example, `7d`). Processing delays do not shorten that displayed duration. When extending a regular mute, this total includes the remaining time carried over from the previous mute. Ban screens and active punishment views continue to show the remaining time.
+
 ## Configured and custom reasons
 
 `/ban`, `/mute`, and `/shadowmute` treat a single reason argument as a configured key when it matches exactly. The configured duration and display name are then used. Multi-word text or an unknown single key becomes a custom permanent reason.
