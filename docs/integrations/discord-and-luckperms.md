@@ -29,9 +29,19 @@ The body contains the event type, player UUID and name, actor name, reason, dura
 
 `invite-url` and `display` are separate: they are shown to players on freeze messages and ban screens. Replace both shipped placeholders before publishing the plugin configuration to players.
 
+## LuckPerms permission editor
+
+In Minecraft, run `/betterpunish perm setup` and click **Choose a group** or **Choose a player**. Enter the LuckPerms group or player name. Tab suggests loaded groups and online players. You can enter the name of an offline player known to LuckPerms.
+
+- **✓ Allow** grants the permission. **✗ Deny** sets an explicit denial.
+- **Reset** removes the direct permanent global assignment. Inheritance, defaults and contextual or temporary rules may still affect access.
+- **Skip** moves to the next permission. **Cancel** closes the editor.
+
+Each permission is saved as you go. The editor shows the target's permanent global assignment. It edits individual BetterPunish permissions and requires `betterpunish.perm` (OP by default).
+
 ## LuckPerms mute-group synchronization
 
-LuckPerms is a soft dependency used only when mute-group sync is enabled:
+BetterPunish uses LuckPerms to synchronize the mute group when enabled:
 
 ```yaml
 mute-group-sync:

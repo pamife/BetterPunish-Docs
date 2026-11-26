@@ -81,6 +81,19 @@ Query limits must be positive and are capped at 100.
 !!! danger
     `/punishpull` and `/punishcleardb` change stored moderation data. Back up the `data/` directory first.
 
+## In-game permission editor
+
+LuckPerms must be installed. Each command requires `betterpunish.perm`, which defaults to OP. `/tggpunish` is an alias.
+
+| Command | Description |
+| --- | --- |
+| `/betterpunish perm [setup]` | Start setup and choose whether to edit a group or a player. |
+| `/betterpunish perm setup <group\|player> <name>` | Go through BetterPunish permissions for that target. |
+| `/betterpunish perm <group\|player> <name> <permission>` | Open a single permission for editing. |
+| `/betterpunish perm cancel` | Close the editor. Changes already submitted are kept. |
+
+Use Tab to complete LuckPerms groups, online players, and supported permission names. Type the name of an offline player if LuckPerms already knows them. See [the chat permission editor](../integrations/discord-and-luckperms.md#luckperms-permission-editor) for the chat controls.
+
 ## Direct Discord webhook
 
 | Command | Purpose | Permission |

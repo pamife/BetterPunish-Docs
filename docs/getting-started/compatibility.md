@@ -25,3 +25,7 @@ The matrix proves that BetterPunish loads, enables, reloads, disables, and shuts
 ## Optional direct Discord webhook
 
 Startup creates discord.yml with delivery disabled. Direct logging uses Java HTTP and Discord Components V2 without a bot or additional plugin. Java/Paper requirements and the storage format remain as listed above. See [Discord setup](../integrations/discord-webhooks.md).
+
+## Optional LuckPerms permission editor
+
+The [in-game permission editor](../integrations/discord-and-luckperms.md#luckperms-permission-editor) requires LuckPerms and saves permission changes in its storage.

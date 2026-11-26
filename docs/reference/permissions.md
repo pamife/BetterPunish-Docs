@@ -65,12 +65,15 @@ The following runtime nodes are checked by the code but are not declared as stan
 
 | Permission | Default | Purpose |
 | --- | --- | --- |
+| `betterpunish.perm` | OP | Edit BetterPunish permission assignments for LuckPerms groups and players from Minecraft chat. |
 | `betterpunish.reload` | OP | Reload configuration and local services. |
 | `betterpunish.migrate` | OP | Upload local punishment rows to Supabase. |
 | `betterpunish.pull` | OP | Replace local history from Supabase. |
 | `betterpunish.cleardb` | OP | Clear local and configured remote punishment data. |
 
 ## Wildcard and legacy nodes
+
+Grant `betterpunish.perm` only to trusted administrators. A LuckPerms wildcard such as `betterpunish.*` can match the editor permission. The editor offers individual BetterPunish feature permissions and omits the editor permission and wildcard.
 
 `betterpunish.*` defaults to operators and grants the child nodes listed in the plugin descriptor. The current child list does **not** include every later moderation permission, including `betterpunish.note`, `betterpunish.freeze`, `betterpunish.clearchat`, `betterpunish.mutechat`, and `betterpunish.slowmode`. Grant role permissions explicitly instead of relying on the wildcard.
 

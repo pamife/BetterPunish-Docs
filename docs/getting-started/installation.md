@@ -29,7 +29,7 @@ BetterPunish is compiled against the Paper API and uses Paper's asynchronous cha
 ## Compatibility notes
 
 - LuckPerms and Vulcan are soft dependencies. BetterPunish starts without them.
-- LuckPerms is only required when `mute-group-sync.enabled` is enabled.
+- The [permission editor](../integrations/discord-and-luckperms.md#luckperms-permission-editor) and mute-group synchronization require LuckPerms.
 - Vulcan is detected at runtime. If neither supported Vulcan event class is present, the integration is skipped.
 - Supabase and Discord are disabled while their shipped placeholder values remain unchanged.
 
