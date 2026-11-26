@@ -153,7 +153,7 @@ ban-broadcast:
   format: "<red><bold><player> was banned</bold></red>"
 ```
 
-Non-silent, non-anticheat bans use this public broadcast. If the configured sound is invalid, BetterPunish logs a warning and attempts its built-in fallback sound.
+When enabled, BetterPunish sends announcements for non-silent, non-anticheat bans directly to all online players and to the server console. If the configured sound is invalid, BetterPunish logs a warning and attempts its built-in fallback sound.
 
 ## Freeze-log behavior
 

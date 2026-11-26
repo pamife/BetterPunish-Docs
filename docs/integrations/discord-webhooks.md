@@ -7,7 +7,7 @@ BetterPunish posts moderation logs directly to an ordinary Discord incoming webh
 1. In Discord, open **Server Settings → Integrations → Webhooks**, create a webhook, select a moderation channel, and copy its URL. Creating webhooks requires Manage Webhooks permission.
 2. Start BetterPunish once. It creates `plugins/BetterPunish/discord.yml` with delivery disabled.
 3. Set `enabled: true` and paste the full URL into `webhook.url`. Keep this URL private: it includes the webhook token.
-4. Run `/betterpunish webhook reload`, then `/betterpunish webhook test`. `/tggpunish` is an alias.
+4. Run `/betterpunish webhook reload` to check whether delivery is enabled, then `/betterpunish webhook test`. `/tggpunish` is an alias.
 5. A successful test reports Discord's confirmation. It creates a real message in the selected channel and does not create a punishment record.
 
 For a forum/media channel, use an existing thread and append `?thread_id=YOUR_NUMERIC_THREAD_ID` to the webhook URL.
@@ -135,5 +135,5 @@ Protocol references: [Discord Components](https://docs.discord.com/developers/co
 - **HTTP 401/403/404:** replace an invalid/deleted webhook or restore channel access, then reload. A failed delivery does not fall back to the companion.
 - **HTTP 429:** wait for the reported rate limit; avoid repeatedly issuing tests. Check the retry setting if notifications are dropped after repeated rate limits.
 - **HTTP 400:** verify the webhook/channel/thread and custom image URL. The test payload is a real Components V2 message, not a legacy embed.
-- **Invalid configuration:** check YAML indentation, `en`/`de`, six-digit quoted hex colors, HTTPS URLs, timestamp pattern/timezone, and delivery bounds. Logs deliberately omit webhook URLs, response bodies, and exception details.
+- **Invalid configuration.** Check the console for the setting to correct or for a YAML loading error. The console omits webhook URLs, configuration values, and response bodies.
 - **Need to disable:** set `enabled: false` and reload. Previously sent Discord messages remain in the channel.
