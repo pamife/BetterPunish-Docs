@@ -18,12 +18,17 @@ For a forum/media channel, use an existing thread and append `?thread_id=YOUR_NU
 | --- | --- |
 | Ban / Tempban | `#ED4245` |
 | Mute / Tempmute | `#FEE75C` |
+| Shadowmute / Temporary shadowmute / Warning | `#FEE75C` |
 | Kick | `#F47B67` |
 | Unban / Unmute | `#57F287` |
+| Edit / Proof added / Proof removed | `#5865F2` |
+| Expired / Replaced | `#95A5A6` |
 
-Temporary versus permanent events are determined from the stored expiration, including configured reasons and offense escalation. Logging uses the successful punishment/removal path shared by commands, GUI removals, chat-review mutes, and automatic bans. Cancelled kicks and unsuccessful removals do not produce notifications. Silent actions still reach the private moderation webhook. Ordinary expiration, edits, warnings, and shadowmute applications are outside these seven events; removing a shadowmute is reported as Unmute.
+Logging covers successful punishment actions, including offense escalation, GUI removals, chat-review mutes, automatic bans, and silent actions. Unban and Unmute show the original punishment ID. A new punishment that replaces an active one logs the replacement and the new punishment. Expiration is logged during server uptime, checked every five seconds at normal tick rate.
 
-When the direct webhook is enabled, these seven event types use it instead of the legacy companion's punishment broadcast, even when an individual event is filtered or delivery fails. This avoids a second Discord notification through the companion. Other companion alerts and Supabase synchronization continue as configured. With the webhook disabled, legacy companion behavior remains available through `config.yml`.
+Edits to reason, duration, or moderator identify the editor and show the previous and new value according to the corresponding field visibility settings. Proof additions and removals identify the moderator and show the updated number of proofs. Evidence links stay in the punishment record. Send these logs to a private staff channel.
+
+When the direct webhook is enabled, it handles punishment broadcasts, including events filtered out in `discord.yml`. With the webhook disabled, legacy companion behavior remains available through `config.yml`. Other companion alerts and Supabase synchronization continue as configured.
 
 ## Example configuration
 
@@ -36,9 +41,6 @@ webhook:
 language: de
 title: "{emoji} {event}"
 footer: "TGGPunish • Moderationsprotokoll"
-timestamp:
-  format: "dd.MM.yyyy HH:mm:ss z"
-  timezone: "Europe/Berlin"
 thumbnail:
   enabled: false
   url: "https://mc-heads.net/avatar/{uuid}/128"
@@ -50,6 +52,7 @@ fields:
   duration: true
   id: true
   timestamp: true
+  expiration: true
   footer: true
 events:
   ban:
@@ -64,6 +67,15 @@ events:
   tempmute:
     enabled: true
     color: "#FEE75C"
+  shadowmute:
+    enabled: true
+    color: "#FEE75C"
+  tempshadowmute:
+    enabled: true
+    color: "#FEE75C"
+  warn:
+    enabled: true
+    color: "#FEE75C"
   kick:
     enabled: true
     color: "#F47B67"
@@ -73,6 +85,21 @@ events:
   unmute:
     enabled: true
     color: "#57F287"
+  edit:
+    enabled: true
+    color: "#5865F2"
+  proof_add:
+    enabled: true
+    color: "#5865F2"
+  proof_remove:
+    enabled: true
+    color: "#5865F2"
+  expire:
+    enabled: true
+    color: "#95A5A6"
+  replaced:
+    enabled: true
+    color: "#95A5A6"
 delivery:
   timeout-seconds: 10
   max-rate-limit-retries: 3
@@ -83,7 +110,7 @@ Replace the URL placeholders with the copied Discord URL; placeholders are inten
 - `language`: `en` or `de`, for event names and field labels. Customize the footer separately.
 - `title`: plain text with `{emoji}` and `{event}` placeholders. Markdown characters in configured text and player values are escaped; the formatter supplies the layout.
 - `fields`: hide individual fields. Duration is omitted for kicks and removals. Temporary durations show the total from creation to expiration, including remaining time carried over when extending a regular mute.
-- `timestamp`: Java `DateTimeFormatter` pattern and timezone. Examples: `yyyy-MM-dd HH:mm:ss z`, `dd.MM.yyyy HH:mm`, `UTC`, `Europe/Berlin`.
+- Discord renders native timestamps in each reader's locale and time zone. Use `fields.timestamp` for the event time and `fields.expiration` for the expiration of temporary punishments. Existing `timestamp.format` and `timestamp.timezone` entries can be removed.
 - `thumbnail`: disabled by default. The HTTPS provider URL supports `{uuid}` and `{name}`. Discord fetches the image; enabling it shares that identifier with Discord and the image provider. Invalid player UUIDs fall back to text.
 - `delivery.timeout-seconds`: 1–30 seconds for connection and request timeouts.
 - `delivery.max-rate-limit-retries`: 0–5 retries after explicit HTTP 429 responses. The test command bypasses individual event filters, but respects the global enabled switch.
@@ -113,7 +140,7 @@ The service POSTs to `/api/v10/webhooks/WEBHOOK_ID/WEBHOOK_TOKEN?wait=true&with_
       { "type": 10, "content": "## ⏳ Player temporarily banned" },
       { "type": 14, "divider": true, "spacing": 1 },
       { "type": 10, "content": "**Player** · Steve" },
-      { "type": 10, "content": "**Moderator** · Console\n**Reason** · Cheating\n**Duration** · 7d\n**Punishment ID** · BAN-000001\n**Timestamp** · 2026-11-10 18:00:00 UTC" },
+      { "type": 10, "content": "**Moderator** · Console\n**Reason** · Cheating\n**Duration** · 7d\n**Punishment ID** · BAN-000001\n**Timestamp** · <t:1794333600:F>\n**Expires** · <t:1794938400:F>" },
       { "type": 14, "divider": true, "spacing": 1 },
       { "type": 10, "content": "-# TGGPunish • Moderation log" }
     ]
@@ -129,7 +156,7 @@ Protocol references: [Discord Components](https://docs.discord.com/developers/co
 
 - HTTP and formatting run on a private background worker. A bounded queue holds at most 100 active/pending notifications. Queue overflow drops the new notification with a throttled warning; moderation still succeeds.
 - Discord's `Retry-After`, `retry_after`, and exhausted-bucket reset headers govern serialized delivery. Retries are bounded. HTTP 401/403/404 or a requested delay longer than five minutes pauses delivery until reload.
-- The last 2,048 accepted event IDs/types are deduplicated in memory. The Freeze-Log path emits only its existing creation event. Discord offers no webhook idempotency key: after an ambiguous network timeout or HTTP 5xx failure, delivery is not automatically retried to avoid duplicate messages. Check the channel before manually repeating a test.
+- The last 2,048 one-time events are deduplicated in memory. Each successful edit or proof change gets its own notification. Discord offers no webhook idempotency key. After an ambiguous network timeout or HTTP 5xx failure, check the channel before manually repeating a test.
 - Reload and shutdown cancel pending requests and clear the in-memory queue/deduplication cache. There is no persistent outbox or replay of historical punishments.
 - **No message:** check `enabled`, the event toggle, channel/thread selection, network access to Discord over HTTPS, and the result of the test command.
 - **HTTP 401/403/404:** replace an invalid/deleted webhook or restore channel access, then reload. A failed delivery does not fall back to the companion.

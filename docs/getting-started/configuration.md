@@ -147,13 +147,14 @@ Use a dedicated project and keep the key private. Database tables and synchroniz
 ```yaml
 ban-broadcast:
   enabled: true
+  show-title: true
   sound: "ITEM_MACE_SMASH_GROUND"
   volume: 10.5
   pitch: 0.8
   format: "<red><bold><player> was banned</bold></red>"
 ```
 
-When enabled, BetterPunish sends announcements for non-silent, non-anticheat bans directly to all online players and to the server console. If the configured sound is invalid, BetterPunish logs a warning and attempts its built-in fallback sound.
+When enabled, BetterPunish sends announcements for non-silent, non-anticheat bans to online players and the server console. The on-screen title also appears when chat is hidden. Set `show-title: false` to turn off the title and keep the chat announcement. If the configured sound is invalid, BetterPunish logs a warning and attempts its built-in fallback sound.
 
 ## Freeze-log behavior
 
